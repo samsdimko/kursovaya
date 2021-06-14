@@ -1,0 +1,16 @@
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+ <body bgcolor="#c0c0c0">
+{% load static %}
+  <p align="center"><img src="{% static ima %}" alt="Картинка"/></p>
+  <center><form action="{% url 'descript:continue_' page_id ima %}" method="post"> 
+  <p align="center">Нужно ли описать еще персонажей?</p>
+  {% csrf_token %}
+   
+   <p align="center"><input type="submit" value="Отправить"></p>
+  </form></center>
+</body>
+
+
