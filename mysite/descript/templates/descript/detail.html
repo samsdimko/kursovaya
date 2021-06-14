@@ -1,0 +1,30 @@
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Вопрос</title>
+ </head>
+<body>
+ 
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% load static %}
+  <p><img src="{% static ima %}" alt="беды с башкой"/></p>
+  <form action=/question1/ method="post">
+  {% csrf_token %}
+  {% for quest in page.question_set.all %}
+   <p><strong>{{ quest }}</strong></p>
+   <p><select name="characteristic">
+    <option selected name='choice' id="choice{{ forloop.counter }}" value="-----">-----</option>
+    {% for choice in quest.answerchoice_set.all %}
+     <option name='choice' id="choice{{ forloop.counter }}" value={{ choice.id }}>{{ choice }}</option>
+    {% endfor %}
+   </select></p>
+  {% endfor %}
+  <p><label for="textanswer">Текстовый ответ: </label></p>
+    <input id="textanswer" type="text" name="textanswer" value="{{ current_name }}">
+    <p><input type="submit" value="Далее"></p>
+  </form>    
+
+</body>
+
